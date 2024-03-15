@@ -1,0 +1,14 @@
+
+database:
+  name: mysql
+  url: 'root:123456@tcp(127.0.0.1:3306)/leopard?charset=utf8mb4&parseTime=True&loc=Local'
+server:
+  port: '8000'
+logger:
+  enable: false
+  level: info
+  path: '/Users/pleuvoir/dev/space/git/crypto-follower/logs'
+  filename: crypto-follower
+  maxAge: 1440h
+  rotationTime: 24h
+
