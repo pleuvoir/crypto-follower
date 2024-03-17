@@ -33,7 +33,7 @@ func Init() {
 
 func initMainEngine(app *config.ApplicationConfig) {
 	mainEngine := engine.NewMainEngine(event.NewEventEngine())
-	mainEngine.InitEngines()
+	mainEngine.InitEngines(app)
 	mainEngine.Start()
 	Global.MainEngine = mainEngine
 }

@@ -1,6 +1,7 @@
 package engine
 
 import (
+	"crypto-follower/core/config"
 	"crypto-follower/core/event"
 	"github.com/gookit/color"
 	"sync"
@@ -30,7 +31,8 @@ func NewMainEngine(eventEngine *event.Engine) *MainEngine {
 	return &mainEngine
 }
 
-func (m *MainEngine) InitEngines() {
+func (m *MainEngine) InitEngines(app *config.ApplicationConfig) {
+	m.AddEngine(NewDbEngine(&app.Database))
 }
 
 // RegisterListener 注册事件
@@ -88,4 +90,23 @@ func (m *MainEngine) GetAllEngine() (engines []Engineer) {
 		engines = append(engines, engine)
 	}
 	return engines
+}
+
+// Raw 执行SQL
+func (m *MainEngine) Raw(sql string, values any, dest any) {
+	o, ok := m.engineMap.Load(DefaultSqlEngineName)
+	if !ok {
+		panic("未找到SQL引擎")
+	}
+	o.(*SqlLiteEngine).Raw(sql, values, dest)
+}
+
+// Insert 插入对象
+func (m *MainEngine) Insert(values any) {
+	o, ok := m.engineMap.Load(DefaultSqlEngineName)
+	if !ok {
+		panic("未找到SQL引擎")
+	}
+	o.(*SqlLiteEngine).Insert(values)
+
 }
