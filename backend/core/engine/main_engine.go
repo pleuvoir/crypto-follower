@@ -2,7 +2,6 @@ package engine
 
 import (
 	"crypto-follower/core/config"
-	"crypto-follower/core/event"
 	"github.com/gookit/color"
 	"sync"
 	"time"
@@ -18,12 +17,12 @@ const DefaultMainEngineName = "main-engine"
 
 type MainEngine struct {
 	TodayDate   string
-	eventEngine *event.Engine
+	eventEngine *Engine
 	engineMap   sync.Map //[string]Engineer 引擎合集
 }
 
 // NewMainEngine 构建主引擎
-func NewMainEngine(eventEngine *event.Engine) *MainEngine {
+func NewMainEngine(eventEngine *Engine) *MainEngine {
 	mainEngine := MainEngine{}
 	mainEngine.TodayDate = time.Now().Format("2006-01-02")
 	mainEngine.eventEngine = eventEngine
@@ -33,11 +32,15 @@ func NewMainEngine(eventEngine *event.Engine) *MainEngine {
 
 func (m *MainEngine) InitEngines(app *config.ApplicationConfig) {
 	m.AddEngine(NewDbEngine(&app.Database))
+	m.AddEngine(NewRestEngine(app.Server.Port, func(engine *RestEngine) {
+		color.Greenf("Restful服务已启动 listen on http://127.0.0.1:%s", engine.port)
+		color.Println()
+	}))
 }
 
 // RegisterListener 注册事件
-func (m *MainEngine) RegisterListener(t event.Type, f func(e event.Event)) {
-	m.eventEngine.Register(t, event.AdaptEventHandlerFunc(f))
+func (m *MainEngine) RegisterListener(t Type, f func(e Event)) {
+	m.eventEngine.Register(t, AdaptEventHandlerFunc(f))
 }
 
 func (m *MainEngine) Name() string {

@@ -14,10 +14,10 @@ import (
 type LoadState int
 
 const (
-	ApplicationEnvVar           = "application.path" //环境变量中配置文件路径具体到文件名称
-	Unload            LoadState = -1                 // 未加载
-	Loading                     = 0                  // 加载中
-	Loaded                      = 1                  // 已加载
+	ApplicationEnvVar           = "conf.path" //环境变量中配置文件路径具体到文件名称
+	Unload            LoadState = -1          // 未加载
+	Loading                     = 0           // 加载中
+	Loaded                      = 1           // 已加载
 )
 
 type ApplicationConfig struct {
@@ -62,7 +62,7 @@ func (c *ApplicationConfig) Load() error {
 	var basePath string
 
 	//从当前目录下读取，可执行目录
-	if basePath, err = c.currentPath(); err != nil {
+	if basePath, err = c.currentExecutePath(); err != nil {
 		return err
 	}
 
@@ -70,20 +70,20 @@ func (c *ApplicationConfig) Load() error {
 		return nil
 	}
 
-	err = errors.New(fmt.Sprintf(`application.yml/application.json config file not found basePath is %s`, basePath))
+	err = errors.New(fmt.Sprintf(`app.yml/app.json config file not found basePath is %s`, basePath))
 	return err
 }
 
 // 尝试加载文件，存在返回 true 不存在返回 false
 func (c *ApplicationConfig) tryLoad(basePath string) (isLoad bool, loadErr error) {
-	configFile := filepath.Join(basePath, "build", "application.yml")
+	configFile := filepath.Join(basePath, "app.yml")
 	if helper.IsExists(configFile) {
 		if loadErr = c.loadFromYml(configFile); loadErr != nil {
 			return true, loadErr
 		}
 		return true, nil
 	}
-	configFile = filepath.Join(basePath, "build", "application.json")
+	configFile = filepath.Join(basePath, "app.json")
 	if helper.IsExists(configFile) {
 		if loadErr = c.loadFromJson(configFile); loadErr != nil {
 			return true, loadErr
@@ -120,7 +120,7 @@ func (c *ApplicationConfig) fileFromEnvVar() string {
 	return ""
 }
 
-func (c *ApplicationConfig) currentPath() (string, error) {
+func (c *ApplicationConfig) currentExecutePath() (string, error) {
 	dir, err := os.Executable()
 	if err != nil {
 		return "", err

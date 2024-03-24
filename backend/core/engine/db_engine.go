@@ -2,9 +2,11 @@ package engine
 
 import (
 	"crypto-follower/core/config"
+	"crypto-follower/core/helper"
 	"github.com/gookit/color"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"path/filepath"
 )
 
 const DefaultSqlEngineName = "db-sqlite-engine"
@@ -25,7 +27,11 @@ func (o *SqlLiteEngine) initEngine(database *config.Database) {
 	color.Greenf("初始化数据库。%v", database)
 	color.Greenln()
 	o.name = DefaultSqlEngineName
-	o.url = database.Url
+	path, err := helper.CurrentPath()
+	if err != nil {
+		panic(err)
+	}
+	o.url = filepath.Join(path, database.Url)
 }
 
 func (o *SqlLiteEngine) Name() string {
@@ -33,9 +39,12 @@ func (o *SqlLiteEngine) Name() string {
 }
 
 func (o *SqlLiteEngine) Start() {
-	db, err := gorm.Open(sqlite.Open(o.url), &gorm.Config{})
+	url := o.url
+	color.Greenf("加载%s，%s", o.Name(), url)
+	color.Println()
+	db, err := gorm.Open(sqlite.Open(url), &gorm.Config{})
 	if err != nil {
-		panic("failed to connect database")
+		panic(err)
 	}
 	o.db = db
 	o.autoMigrate() //创建更新表

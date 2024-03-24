@@ -3,7 +3,7 @@ database:
   name: sqlite
   url: crypto-follower.db
 server:
-  port: '8000'
+  port: '8081'
 logger:
   enable: true
   level: info

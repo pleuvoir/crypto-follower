@@ -18,7 +18,7 @@ func TestNewDbEngine(t *testing.T) {
 	t.Log(user.ID)
 
 	var result2 AutoUser
-	engine.Raw("select * from auto_users where id=?", 1, &result2)
+	engine.Raw("select * from auto_users where id=?", 8, &result2)
 
 	t.Logf("%v", result2)
 

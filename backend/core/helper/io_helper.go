@@ -4,6 +4,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"runtime"
 )
 
 // CloseQuietly 安静的调用Close()
@@ -41,4 +42,10 @@ func RootPath() (string, error) {
 		return "", err
 	}
 	return filepath.Dir(dir), nil
+}
+
+// CodeRunPath 当前代码文件执行的位置
+func CodeRunPath() (string, error) {
+	_, filename, _, _ := runtime.Caller(0)
+	return filepath.Dir(filename), nil
 }
