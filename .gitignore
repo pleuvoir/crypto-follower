@@ -2,3 +2,5 @@
 .DS_Store
 logs
 *.db
+desktop/node_modules
+crypto-follower_backend
