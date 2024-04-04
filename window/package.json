@@ -1,0 +1,42 @@
+{
+  "name": "crypto-follwer",
+  "version": "1.0.1",
+  "main": "src/main.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0",
+    "electron": "^21.2.2"
+  },
+  "scripts": {
+    "start": "electron-forge start",
+    "dev": "NODE_ENV=development electron-forge start",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --win --mac"
+  },
+  "dependencies": {
+    "about-window": "^1.15.2",
+    "electron-fetch": "^1.9.1",
+    "freeport": "^1.0.5"
+  },
+  "build": {
+    "appId": "cyrpto-follower",
+    "mac": {
+      "target": {
+        "target": "default",
+        "arch": [
+          "x64",
+          "arm64"
+        ]
+      }
+    },
+    "win": {
+      "target": {
+        "target": "nsis",
+        "arch": [
+          "x64"
+        ]
+      }
+    },
+    "asar": false
+  }
+}

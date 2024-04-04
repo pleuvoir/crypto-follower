@@ -1,8 +1,8 @@
 package controller
 
 import (
-	"crypto-follower/restful/model"
 	"github.com/gin-gonic/gin"
+	"github.com/pleuvoir/gamine/component/restful"
 	"net/http"
 )
 
@@ -14,12 +14,12 @@ type IndexController struct {
 }
 
 func (t *IndexController) Index(ct *gin.Context) {
-	rs := model.Success("success")
+	rs := restful.Success("success")
 	ct.JSON(http.StatusOK, rs)
 }
 
 func (t *IndexController) Welcome(c *gin.Context) {
-	success := model.Success("welcome")
+	success := restful.Success("welcome")
 	success.SetData("u find new place")
 	c.JSON(http.StatusOK, success)
 }

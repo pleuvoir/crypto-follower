@@ -1,14 +1,2 @@
-
-database:
-  name: sqlite
-  url: crypto-follower.db
-server:
-  port: '8081'
-logger:
-  enable: true
-  level: info
-  path: '/Users/pleuvoir/dev/space/git/crypto-follower/logs'
-  filename: crypto-follower
-  maxAge: 1440h
-  rotationTime: 24h
-
+restful:
+  port: "8000"
