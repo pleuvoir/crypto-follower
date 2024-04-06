@@ -1,2 +1,2 @@
-restful:
+http:
   port: "8000"

@@ -7,3 +7,4 @@ crypto-follower_backend
 window/bin
 window/dist
 window/node_modules
+frontend/node_modules

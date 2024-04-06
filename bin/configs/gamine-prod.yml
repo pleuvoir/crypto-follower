@@ -1,0 +1,12 @@
+
+log-engine:
+  log-configs:
+    default:
+      level: info
+      path: '../logs'
+      filename: default
+      maxAge: 1440h
+      rotationTime: 24h
+
+sqlite:
+  path: './sqlite-yml.db'
