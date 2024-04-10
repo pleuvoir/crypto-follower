@@ -86,7 +86,7 @@ func bindSocketIO(socketConf SocketConf) {
 		count := 1
 		for true {
 			//可以随时获取
-			socketio.Get().PushResponse(socketio.ResponseMessage{Data: count, MethodName: "updateCount"})
+			socketio.Get().PushResponse(socketio.ResponseMessage{Data: count, MethodName: "hello"})
 			count++
 			time.Sleep(3 * time.Second)
 		}
