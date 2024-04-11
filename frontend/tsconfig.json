@@ -1,23 +1,51 @@
 {
-    "compilerOptions": {
-        "baseUrl": "src", // 这里设置基础路径
-        "target": "es5", // 设置JavaScript的目标版本
-        "lib": ["dom", "dom.iterable", "esnext"], // 包含DOM库和ESNext库
-        "jsx": "react", // 启用JSX转换
-        "allowJs": true, // 允许在项目中使用JavaScript文件
-        "skipLibCheck": true, // 跳过库文件的类型检查
-        "esModuleInterop": true, // 启用esModule语法
-        "allowSyntheticDefaultImports": true, // 允许从没有默认导出的模块进行合成默认导入
-        "strict": true, // 启用所有严格的类型检查选项
-        "forceConsistentCasingInFileNames": true, // 强制Windows文件系统区分大小写
-        "noImplicitReturns": true, // 报告不返回值的函数
-        "noImplicitThis": true, // 报告this在函数中可能是未定义的
-        "noImplicitAny": false, // 禁止使用any类型
-        "strictNullChecks": true, // 严格检查null和undefined
-        "strictFunctionTypes": true, // 严格检查函数参数和返回类型
-        "strictPropertyInitialization": true, // 严格检查类的属性初始化
-        "noImplicitUseType": true, // 禁止隐式使用类型
-    },
-    "include": ["src","next-env.d.ts", "**/*.ts", "**/*.tsx"], // 包含所有的TypeScript和JSX文件
-    "exclude": ["node_modules"] // 排除node_modules目录
+  "compilerOptions": {
+    "baseUrl": "src",
+    // 这里设置基础路径
+    "target": "es5",
+    // 设置JavaScript的目标版本
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    // 包含DOM库和ESNext库
+    "jsx": "react",
+    // 启用JSX转换
+    "allowJs": true,
+    // 允许在项目中使用JavaScript文件
+    "skipLibCheck": true,
+    // 跳过库文件的类型检查
+    "esModuleInterop": true,
+    // 启用esModule语法
+    "allowSyntheticDefaultImports": true,
+    // 允许从没有默认导出的模块进行合成默认导入
+    "strict": true,
+    // 启用所有严格的类型检查选项
+    "forceConsistentCasingInFileNames": true,
+    // 强制Windows文件系统区分大小写
+    "noImplicitReturns": true,
+    // 报告不返回值的函数
+    "noImplicitThis": true,
+    // 报告this在函数中可能是未定义的
+    "noImplicitAny": false,
+    // 禁止使用any类型
+    "strictNullChecks": true,
+    // 严格检查null和undefined
+    "strictFunctionTypes": true,
+    // 严格检查函数参数和返回类型
+    "strictPropertyInitialization": true
+    // 严格检查类的属性初始化
+  },
+  "include": [
+    "src",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  // 包含所有的TypeScript和JSX文件
+  "exclude": [
+    "node_modules"
+  ]
+  // 排除node_modules目录
 }
